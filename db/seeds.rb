@@ -10,6 +10,7 @@
 
 puts "Cleaning database..."
 Experience.destroy_all
+Reservation.destroy_all
 
 puts "Creating experiences..."
 experiences = [

@@ -1,9 +1,11 @@
 <div class="container mt-3">
   <% @experiences.each do | experience|%>
-    <%= experience.nom %>
-    <%= experience.description %>
+    <p><%= experience.nom %></p>
+    <p><%= experience.description %></p>
     <p><%= experience.prix %>€</p>
+     <%= link_to "Découvre cette expérience", experience_path(experience) %>
      <hr>
   <% end %>
 
+<%= link_to "retour à la page d'accueil", root_path%>
 </div>
