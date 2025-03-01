@@ -1,6 +1,11 @@
-<div class="container">
-  <%= @experience.nom%>
-  <%= @experience.description%>
-  <p><%= @experience.prix%>€</p>
-  <%= link_to "Retour", experiences_path, class: "btn btn-primary" %>
+<div class="container ">
+  <div class="experience-card mt-3">
+    <%= @experience.nom%>
+    <%= @experience.description%>
+    <p><%= @experience.prix%>€</p>
+
+    <%= link_to "Réserve cette expérience", new_experience_reservation_path(@experience) %>
+  </div>
+  <hr>
+  <%= link_to "Retour", experiences_path, class: "btn btn-primary mt-3" %>
 </div>

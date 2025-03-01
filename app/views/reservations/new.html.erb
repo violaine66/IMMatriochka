@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="new">
+    <h3 class= "mt-3">
+      Réserve cette éxpérience
+    </h3>
+    <div class="form">
+
+      <%= simple_form_for [@experience, @reservation] do |f| %>
+
+      <%= f.input :date_de_debut,
+        as: :string,
+            input_html: { data: { controller: "datepicker" }
+      }%>
+      <%= f.input :date_de_fin,
+        as: :string,
+            input_html: { data: { controller: "datepicker" }
+      }%>
+    
+      <%= f.submit "Submit review", class: "btn btn-primary" %>
+      <% end %>
+
+
+
+
+    </div>
+
+  </div>
+
+
+</div>
