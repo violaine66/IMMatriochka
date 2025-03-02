@@ -6,6 +6,16 @@ class ExperiencesController < ApplicationController
 
   def show
     @experience = Experience.find(params[:id])
+    if @experience.latitude && @experience.longitude
+      @markers = [
+        {
+          lat: @experience.latitude,
+          lng: @experience.longitude
+        }
+      ]
+    else
+      @markers = []
+    end
   end
 
   def new

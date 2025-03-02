@@ -9,8 +9,9 @@ Geocoder.configure(
   # https_proxy: nil,           # HTTPS proxy server (user:pass@host:port)
   # api_key: nil,               # API key for geocoding service
   # cache: nil,                 # cache object (must respond to #[], #[]=, and #del)
+  timeout: 5, # seconds
+  lookup: :mapbox, # Defaults to :nominatim, which is less reliable but free
   api_key: ENV['MAPBOX_API_KEY'],
-  lookup: :mapbox,
   # Exceptions that should not be rescued by default
   # (if you want to implement custom error handling);
   # supports SocketError and Timeout::Error
