@@ -1,11 +1,18 @@
 <div class="container mt-3">
-  <% @experiences.each do | experience|%>
-    <p><%= experience.nom %></p>
-    <p><%= experience.description %></p>
-    <p><%= experience.prix %>€</p>
-     <%= link_to "Découvre cette expérience", experience_path(experience) %>
-     <hr>
-  <% end %>
+  <div class="experiences mb-5">
+    <% @experiences.each do | experience|%>
+    <%= link_to experience_path(experience), class: "text-decoration-none text-dark" do %>
+      <div class="experience-card">
+      <p><img src="/images/istockphoto-622776362-612x612.jpg" alt="logo" width="180" height="180"></p>
+      <p class="name"><%= experience.nom %></p>
+      <p><%= experience.description %></p>
+      <p><%= experience.prix %>€</p>
+       <%= link_to "Découvre cette expérience", experience_path(experience) %>
 
-<%= link_to "retour à la page d'accueil", root_path%>
-</div>
+      </div>
+       <% end %>
+       <% end %>
+  </div>
+
+<%= link_to "retour à la page d'accueil", root_path, class:"mb-3" %>
+  </div>

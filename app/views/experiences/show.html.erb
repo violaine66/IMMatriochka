@@ -1,11 +1,18 @@
 <div class="container ">
   <div class="experience-card mt-3">
-    <%= @experience.nom%>
+    <%= @experience.nom %>
     <%= @experience.description%>
     <p><%= @experience.prix%>€</p>
-
-    <%= link_to "Réserve cette expérience", new_experience_reservation_path(@experience) %>
   </div>
+
+   <div data-controller="toggle" class="mt-5">
+      <button class="btn btn-secondary" data-action="click->toggle#fire"> Réserver</button>
+      <div data-toggle-target="toggableElement"  class="d-none">
+        <%= render "reservations/form", experience: @experience, reservation: Reservation.new %>
+      </div>
+
+   </div>
+
   <hr>
-  <%= link_to "Retour", experiences_path, class: "btn btn-primary mt-3" %>
+  <%= link_to "Retour", experiences_path, class: "text-decoration-none text-dark" %>
 </div>

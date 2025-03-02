@@ -1,4 +1,5 @@
 class ReservationsController < ApplicationController
+  before_action :set_experience, only: [:new, :create]
 
   def index
     @reservations = Reservation.all
@@ -9,25 +10,27 @@ class ReservationsController < ApplicationController
   end
 
   def new
-    @experience = Experience.find(params[:experience_id])
-    @reservation = Reservation.new
+    @reservation = @experience.reservations.build
+
   end
 
   def create
-    @experience = Experience.find(params[:experience_id])
-    @reservation = Reservation.new(reservation_params)
-    @reservation.experience = @experience
-    @reservation.user = current_user
+    @reservation = @experience.reservations.build(reservation_params)
+
     if @reservation.save
-      redirect_to reservation_path(@reservation)
+
+      redirect_to experience_reservation_path(@experience, @reservation), notice: 'Votre réservation a bien été enregistrée'
     else
-      render :new,  unprocessable_entity:
+      render "experiences/show", statut: :unprocessable_entity
     end
   end
 
   private
+  def set_experience
+    @experience = Experience.find(params[:experience_id])
+  end
 
   def reservation_params
-    params.require(:reservation).permit(:date_de_debut, :date_de_fin, :prix_total, :statut)
+    params.require(:reservation).permit(:date_de_debut, :date_de_fin, :prix_total, :statut, :experience_id)
   end
 end
