@@ -10,7 +10,8 @@ class ExperiencesController < ApplicationController
       @markers = [
         {
           lat: @experience.latitude,
-          lng: @experience.longitude
+          lng: @experience.longitude,
+          info_window_html: render_to_string(partial: "info_window", locals: { experience: @experience })
         }
       ]
     else
