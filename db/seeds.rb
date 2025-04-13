@@ -136,8 +136,6 @@ experiences = [
   }
 ]
 
-
-
 experiences.each do |experience|
   Experience.create!(experience)
 end
