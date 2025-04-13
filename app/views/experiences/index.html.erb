@@ -1,38 +1,41 @@
- <%= render "shared/navbar" %>
+<%= render "shared/navbar" %>
+
 <div class="container mt-3">
   <div class="experiences mb-5">
-    <% @experiences.each do | experience|%>
-    <%= link_to experience_path(experience), class: "text-decoration-none text-dark" do %>
-      <div class="experience-card">
-        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-inner">
+    <% @experiences.each_with_index do |experience, index| %>
+      <%= link_to experience_path(experience), class: "text-decoration-none text-dark" do %>
+        <div class="experience-card">
+          <div id="carouselExperience<%= index %>" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <!-- Image 1 : statique -->
               <div class="carousel-item active">
-                <img src="/images/istockphoto-622776362-612x612.jpg" alt="logo" width="180" height="180">
+                <img src="/images/istockphoto-622776362-612x612.jpg" alt="image générique" width="180" height="180">
               </div>
+
+              <!-- Image 2 : dynamique -->
               <div class="carousel-item">
-                <img src="/images/Museo_Frida_Kahlo.jpg" alt="logo" width="180" height="180">
+                <%= image_tag experience.photo_url, alt: experience.nom, width: 180, height: 180 %>
               </div>
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExperience<%= index %>" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExperience<%= index %>" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
           </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
+
+          <p class="name mt-3"><%= experience.nom %></p>
+          <p><%= experience.description %></p>
+          <p><%= experience.prix %>€</p>
+          <%= link_to "Découvre cette expérience", experience_path(experience) %>
         </div>
-      <p class="name mt-3"><%= experience.nom %></p>
-      <p><%= experience.description %></p>
-      <p><%= experience.prix %>€</p>
-       <%= link_to "Découvre cette expérience", experience_path(experience) %>
-
-      </div>
-       <% end %>
-       <% end %>
-
+      <% end %>
+    <% end %>
   </div>
 
-
-<%= link_to "retour à la page d'accueil", root_path, class:"mb-3" %>
-  </div>
+  <%= link_to "Retour à la page d'accueil", root_path, class: "mb-3" %>
+</div>
