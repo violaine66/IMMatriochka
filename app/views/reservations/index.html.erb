@@ -1,3 +1,19 @@
 <div class="container">
-  Coucou
+ <div class="col">
+  <div class="row">
+    <% if @reservations.any? %>
+      <% @reservations.each do |r| %>
+        <%= r.experience.nom %>
+        <%= r.date_de_debut %>
+        <%= r.date_de_fin %>
+        <%= r.experience.prix %>
+        <hr>
+      <% end %>
+    <% else %>
+      <p>Pas de réservations pour le moment.</p>
+    <% end %>
+
+  </div>
+ </div>
+ <%= link_to "Retour aux expériences", experiences_path%>
 </div>

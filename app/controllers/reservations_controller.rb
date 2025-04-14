@@ -5,6 +5,7 @@ class ReservationsController < ApplicationController
     @reservations = current_user.reservations
   end
 
+
   def new
     @reservation = @experience.reservations.build
 
@@ -13,12 +14,13 @@ class ReservationsController < ApplicationController
 
   def create
     @reservation = @experience.reservations.build(reservation_params)
+    @reservation.user = current_user
 
     if @reservation.save
 
-      redirect_to experience_reservation_path(@experience, @reservation), notice: 'Votre réservation a bien été enregistrée'
+      redirect_to experiences_path, notice: 'Votre réservation a bien été enregistrée'
     else
-      render "experiences/show", statut: :unprocessable_entity
+      redirect_to experiences_path, statut: :unprocessable_entity
     end
   end
 
