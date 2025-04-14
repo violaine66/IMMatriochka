@@ -5,10 +5,10 @@
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
 </div>
 
-<div class="container">
+<div class="container mt-3">
   <div class="photo-container">
-    <div class="photo mt-3">
-      <%=image_tag asset_path (@experience.photo_url), width: 180, height: 180 %>
+    <div class="photo">
+      <%=image_tag asset_path (@experience.photo_url), width: 180, height: 150 %>
     </div>
     <div class="experience-card mt-3">
       <%= @experience.nom %>
@@ -19,7 +19,7 @@
   </div>
 
    <div data-controller="toggle" class="text-center mt-5">
-      <button class="btn btn-secondary" data-action="click->toggle#fire"> Réserver</button>
+      <button class="btn-reserver" data-action="click->toggle#fire"> Réserver</button>
       <div data-toggle-target="toggableElement"  class="d-none">
         <%= render "reservations/form", experience: @experience, reservation: Reservation.new %>
       </div>
