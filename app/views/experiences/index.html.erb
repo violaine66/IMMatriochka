@@ -31,11 +31,9 @@
           <p class="name mt-3"><%= experience.nom %></p>
           <p><%= experience.description %></p>
           <p><%= experience.prix %>€</p>
-          <%= link_to "Découvre cette expérience", experience_path(experience) %>
+          <%= link_to "Découvre cette expérience", experience_path(experience), class:" decouvre" %>
         </div>
       <% end %>
     <% end %>
   </div>
-
-  <%= link_to "Retour à la page d'accueil", root_path, class: "mb-3" %>
-</div>
+  </div>

@@ -19,7 +19,7 @@
   </div>
 
    <div data-controller="toggle" class="text-center mt-5">
-      <button class="btn-reserver" data-action="click->toggle#fire"> Réserver</button>
+      <button class="btn-reserver" data-action="click->toggle#fire"> Réserver </button>
       <div data-toggle-target="toggableElement"  class="d-none">
         <%= render "reservations/form", experience: @experience, reservation: Reservation.new %>
       </div>
