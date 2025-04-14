@@ -2,15 +2,12 @@ class ReservationsController < ApplicationController
   before_action :set_experience, only: [:new, :create]
 
   def index
-    @reservations = Reservation.all
-  end
-
-  def show
-    @reservation = Reservation.find(params[:id])
+    @reservations = current_user.reservations
   end
 
   def new
     @reservation = @experience.reservations.build
+
 
   end
 

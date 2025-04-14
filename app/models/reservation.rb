@@ -1,5 +1,6 @@
 class Reservation < ApplicationRecord
   belongs_to :experience
+  belongs_to :user
 
   validates :date_de_debut, presence: true
   validates :date_de_fin, presence: true
