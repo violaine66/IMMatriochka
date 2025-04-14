@@ -31,6 +31,11 @@
           <p class="name mt-3"><%= experience.nom %></p>
           <p><%= experience.description %></p>
           <p><%= experience.prix %>€</p>
+          <% if experience.reviews.count > 0 %>
+            <p><i class="fa-solid fa-star me-1"></i> <%= experience.reviews.count %> avis</p>
+          <% else %>
+            <p>Pas d'avis pour le moment</p>
+          <% end %>
           <%= link_to "Découvre cette expérience", experience_path(experience), class:" decouvre" %>
         </div>
       <% end %>

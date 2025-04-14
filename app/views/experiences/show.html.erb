@@ -1,4 +1,5 @@
  <%= render "shared/navbar" %>
+
 <div style="width: 100%; height: 300px;"
   data-controller="map"
   data-map-markers-value="<%= @markers.to_json %>"
@@ -18,33 +19,35 @@
     </div>
   </div>
 
-<div class="avis">
-  <%= link_to "Donnez votre avis", new_experience_review_path(@experience), class: " text-decoration-none text-dark" %>
-</div>
-
-<div class="avis-container">
-  <% if @experience.reviews.any? %>
-    <% @experience.reviews.each do |review| %>
-      <div class="review">
-        <p><%= review.contenu %></p>
-        <p>Note : <%= review.note %> ⭐</p>
-        <hr>
+  <div class="avis-don d-flex justify-content-center align-items-center mt-3">
+    <div class="avis-container">
+        <% if @experience.reviews.any? %>
+          <% @experience.reviews.each do |review| %>
+            <div class="review d-flex justify-content-center">
+              <em class= "me-2">"<%= review.contenu %>"</em>
+              <%= review.note %> ⭐</p>
+            </div>
+          <% end %>
+        <% else %>
+          <p>Pas d'avis pour le moment.</p>
+        <% end %>
       </div>
-    <% end %>
-  <% else %>
-    <p>Pas d'avis pour le moment.</p>
-  <% end %>
-</div>
 
-
-<div data-controller="toggle" class="text-center mt-5">
-  <button class="btn-reserver" data-action="click->toggle#fire"> Réserver </button>
-  <div data-toggle-target="toggableElement"  class="d-none">
-    <%= render "reservations/form", experience: @experience, reservation: Reservation.new %>
+      <div class="avis mt-3">
+        <%= link_to "Donnez votre avis", new_experience_review_path(@experience), class: " text-decoration-none text-dark" %>
+      </div>
   </div>
 
-</div>
 
-  <hr>
-  <%= link_to "Retour", experiences_path, class: "text-decoration-none text-dark" %>
+
+  <div data-controller="toggle" class="text-center mt-5">
+    <button class="btn-reserver" data-action="click->toggle#fire"> Réserver </button>
+    <div data-toggle-target="toggableElement"  class="d-none">
+      <%= render "reservations/form", experience: @experience, reservation: Reservation.new %>
+    </div>
+
+  </div>
+
+    <hr>
+    <%= link_to "Retour", experiences_path, class: "text-decoration-none text-dark" %>
 </div>
