@@ -5,7 +5,7 @@ class ExperiencesController < ApplicationController
   end
 
   def show
-    @experience = Experience.find(params[:id])
+    @experience = Experience.includes(:reviews).find(params[:id])
     if @experience.latitude && @experience.longitude
       @markers = [
         {
