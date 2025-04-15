@@ -1,3 +1,4 @@
+<%= render "shared/navbar" %>
 <div class="container chatroom">
   <h1> # <%= @chatroom.nom %> </h1>
 
@@ -13,4 +14,7 @@
   <%= simple_form_for [@chatroom, @message], remote: true do |f| %>
     <%= f.input :contenu, label: false, placeholder: "Message ##{@chatroom.nom}" %>
   <% end %>
+  <div class="mt-3 text-center text-decoration-none text-dark">
+    <%= link_to "Retour aux expériences", experiences_path%>
+  </div>
 </div>
