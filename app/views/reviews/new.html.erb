@@ -1,7 +1,7 @@
 <div class="container min-vh-100 d-flex justify-content-center align-items-center">
   <div class="row w-100">
-    <h3>Votre avis nous intéresse !</h3>
-      <div class="col-12 col-md-6 col-lg-4 mx-auto mt-5">
+    <h2 class="text-center">Votre avis nous intéresse !</h2>
+      <div class="col-12 col-md-6 col-lg-4 mx-auto mt-4">
         <%= simple_form_for ([@experience, @review]) do |f| %>
           <%= f.input :contenu, label: "Votre avis" %>
           <%= f.input :note, collection: (1..5).to_a, label: "Evalue ton expérience", input_html: {data: {controller: "star-rating"}} %>
