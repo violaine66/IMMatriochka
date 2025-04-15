@@ -3,16 +3,21 @@
   <div class="row">
     <% if @reservations.any? %>
       <% @reservations.each do |r| %>
-        <%= r.experience.nom %>
-        <%= r.date_de_debut %>
-        <%= r.date_de_fin %>
-        <%= r.experience.prix %>
-        <hr>
-      <% end %>
-    <% else %>
-      <p>Pas de réservations pour le moment.</p>
-    <% end %>
+        <strong><%= r.experience.nom %></strong>
+        <p>du <%= r.date_de_debut.strftime("%d/%m/%Y") %> au <%= r.date_de_fin.strftime("%d/%m/%Y")%></p>
+        <p><%= r.experience.prix %> euros</p>
 
+        <% if Date.today < r.date_de_debut %>
+          <p>Votre réservation n'a pas encore commencé </p>
+        <% elsif Date.today > r.date_de_fin %>
+          <p>Votre réservation est terminée </p>
+        <% else %>
+          <p>Votre réservation est en cours </p>
+        <% end %>
+      <% end %>
+      <% else %>
+        <p>Vous n'avez pas de réservation en cours</p>
+      <% end %>
   </div>
  </div>
  <%= link_to "Retour aux expériences", experiences_path%>
