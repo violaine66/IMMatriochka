@@ -11,6 +11,8 @@
 puts "Cleaning database..."
 Experience.destroy_all
 Reservation.destroy_all
+Chatroom.destroy_all
+User.destroy_all
 
 puts "Creating experiences..."
 
@@ -142,3 +144,22 @@ end
 
 puts "Experiences created successfully!"
 
+puts "Creating users..."
+users = [
+  {nickname: "Violaine",
+  email: "violaine@app.fr",
+  password: "violaine"
+  },
+  {nickname: "Hélène",
+  email: "helene@app.fr",
+  password: "helene"
+  }
+]
+users.each do |user|
+  User.create!(user)
+end
+puts "Users created successfully!"
+
+puts "Creating chatrooms..."
+Chatroom.create!(nom: "general")
+puts "Chatrooms created successfully!"
