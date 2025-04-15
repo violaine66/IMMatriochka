@@ -19,7 +19,7 @@
     </div>
   </div>
 
-  <div class="avis-don d-flex justify-content-center align-items-center mt-3">
+  <div class="avis-don">
     <div class="avis-container">
         <% if @experience.reviews.any? %>
           <% @experience.reviews.each do |review| %>
@@ -29,12 +29,12 @@
             </div>
           <% end %>
         <% else %>
-          <p>Pas d'avis pour le moment.</p>
+          <p class="mt-5 text-center"><em>Pas d'avis pour le moment.</em></p>
         <% end %>
       </div>
 
       <div class="avis mt-3">
-        <%= link_to "Donnez votre avis", new_experience_review_path(@experience), class: " text-decoration-none text-dark" %>
+        <%= link_to "Vous avez vécu cette expérience ? Partagez votre avis !", new_experience_review_path(@experience), class: " text-decoration-none text-dark" %>
       </div>
   </div>
 
