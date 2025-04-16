@@ -3,6 +3,7 @@ class ReservationsController < ApplicationController
 
   def index
     @reservations = current_user.reservations
+    @reservations = Reservation.order(created_at: :desc)
   end
 
 
