@@ -52,6 +52,7 @@ gem "sassc-rails"
 gem "devise"
 gem "cloudinary"
 gem "geocoder"
+gem "noticed"
 
 
 group :development, :test do
