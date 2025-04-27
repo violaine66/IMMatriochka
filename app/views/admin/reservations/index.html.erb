@@ -1,0 +1,27 @@
+<!-- app/views/admin/dashboard.html.erb -->
+<h1>Tableau de bord de l'admin</h1>
+
+<% @reservations.each do |reservation| %>
+  <div class="reservation-card">
+
+    <p><strong>Utilisateur :</strong> <%= reservation.user.nickname %></p>
+    <p><strong>mail  :</strong> <%= reservation.user.email %></p>
+    <p><strong>Expérience :</strong> <%= reservation.experience.nom %></p>
+    <p><strong>Date de début :</strong> <%= reservation.date_de_debut.strftime('%d %b %Y') %></p>
+    <p><strong>Date de fin :</strong> <%= reservation.date_de_fin.strftime('%d %b %Y') %></p>
+    <p><strong>Statut :</strong> <%= reservation.statut %></p>
+
+    <!-- Actions -->
+    <div>
+      <%= form_with url: approve_admin_reservation_path(reservation), method: :patch, local: true do %>
+  <%= submit_tag "Approuver", class: "btn btn-success" %>
+<% end %>
+
+<%= form_with url: reject_admin_reservation_path(reservation), method: :patch, local: true do %>
+  <%= submit_tag "Rejeter", class: "btn btn-danger" %>
+<% end %>
+
+    </div>
+  </div>
+  <hr>
+<% end %>
