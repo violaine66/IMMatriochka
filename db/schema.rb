@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_04_27_144747) do
+ActiveRecord::Schema[7.1].define(version: 2025_04_27_161118) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -83,7 +83,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_27_144747) do
     t.date "date_de_debut"
     t.date "date_de_fin"
     t.integer "prix_total"
-    t.string "statut"
+    t.string "statut", default: "En attente"
     t.bigint "experience_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
