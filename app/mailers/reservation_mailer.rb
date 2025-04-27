@@ -1,13 +1,11 @@
 class ReservationMailer <
   default from: 'notifications@yourapp.com'
 
-  def reservation_approved(reservation)
+  def statut_updated(reservation)
     @reservation = reservation
-    mail(to: @reservation.user.email, subject: 'Votre réservation a été approuvée !')
-  end
+    @user = reservation.user
+    @statut = reservation.statut
 
-  def reservation_rejected(reservation)
-    @reservation = reservation
-    mail(to: @reservation.user.email, subject: 'Votre réservation a été refusée.')
+    mail(to: @user.email, subject: "Mise à jour du statut de votre réservation")
   end
 end
