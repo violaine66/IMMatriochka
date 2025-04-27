@@ -23,8 +23,10 @@ class Reservation < ApplicationRecord
 
   # Validation pour vérifier les chevauchements avec des réservations existantes
   def no_overlap_with_existing_reservations
+    if new_record?
     conflicting_reservations = experience.reservations.where('date_de_debut < ? AND date_de_fin > ?', date_de_fin, date_de_debut).exists?
     errors.add(:base, "Les dates choisies sont déjà réservées") if conflicting_reservations
+  end
   end
 
    # Définir le statut initial comme "en_attente"

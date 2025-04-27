@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
 
   # Routes pour les réservations des utilisateurs
-  resources :reservations, only: [:index]
+  resources :reservations, only: [:index, :edit, :update]
 
   # Routes pour les expériences et les avis
   resources :experiences, only: [:index, :show, :new, :create] do
@@ -17,19 +17,15 @@ Rails.application.routes.draw do
     resources :reviews, only: [:new, :create]
   end
 
-  # Routes Admin
-  namespace :admin do
-    # Cette route redirige vers l'action 'index' de 'admin/reservations'
-    get 'dashboard', to: 'reservations#index', as: 'dashboard'
-
+  #
     # Ressources pour les réservations
-    resources :reservations, only: [:index] do
+    resources :reservations do
       member do
-        patch :approve
-        patch :reject
+        post 'approve'
+        post 'reject'
       end
     end
-  end
+
 
 
   # Routes pour approuver ou rejeter une réservation (dans Admin)

@@ -2,12 +2,16 @@ module Admin
   class ReservationsController < ApplicationController
     before_action :authenticate_user!
     before_action :check_if_admin
+    before_action :set_reservation, only: [:show, :edit, :update, :destroy, :approve]
 
     def index
       @reservations = Reservation.includes(:experience, :user).order(created_at: :desc)
     end
 
     def approve
+   
+      # Vérifiez si la réservation est déjà confirmée ou rejetée
+
       if @reservation.update(statut: "confirmée")
         redirect_to admin_reservations_path, notice: "Réservation approuvée."
       else
@@ -16,6 +20,7 @@ module Admin
     end
 
       def reject
+
     if @reservation.update(statut: "rejetée")
       redirect_to admin_reservations_path, notice: "Réservation rejetée."
     else

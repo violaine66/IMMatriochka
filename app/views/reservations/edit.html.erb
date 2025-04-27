@@ -1,0 +1,12 @@
+<h1>Modifier le statut de la réservation</h1>
+
+<%= form_with model: @reservation, url: reservation_path(@reservation), method: :patch, local: true do |f| %>
+  <div class="form-group">
+    <%= f.label :statut, "Statut" %>
+    <%= f.select :statut, options_for_select(['en_attente', 'confirmée', 'rejetée'] , @reservation.statut), class: "form-control" %>
+  </div>
+
+  <%= f.submit "Mettre à jour", class: "btn btn-primary" %>
+<% end %>
+
+<%= link_to 'Retour', reservations_path, class: 'btn btn-secondary mt-3' %>
