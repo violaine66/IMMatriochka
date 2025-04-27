@@ -9,8 +9,10 @@
 #   end
 
 puts "Cleaning database..."
+
 Experience.destroy_all
 Reservation.destroy_all
+Message.destroy_all
 Chatroom.destroy_all
 User.destroy_all
 
@@ -148,12 +150,12 @@ puts "Creating users..."
 users = [
   {nickname: "Violaine",
   email: "nolila5966@gmail.com",
-  password: "violaine"
+  password: "violaine",
   admin: true
   },
   {nickname: "Hélène",
   email: "violaine-helene.soulas@ac-lille.fr",
-  password: "helene"
+  password: "helene",
   admin: false
   }
 ]

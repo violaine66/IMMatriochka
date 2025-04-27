@@ -56,6 +56,8 @@ gem "noticed"
 
 gem "solid_queue"
 
+gem 'letter_opener', group: :development
+
 
 group :development, :test do
   gem "dotenv-rails"

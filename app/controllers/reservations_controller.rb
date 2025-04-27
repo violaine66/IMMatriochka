@@ -16,7 +16,7 @@ class ReservationsController < ApplicationController
   def create
     @reservation = @experience.reservations.build(reservation_params)
     @reservation.user = current_user
-    @reservation.status = 'pending'
+    @reservation.statut = 'En attente'
 
     if @reservation.save
 
@@ -28,7 +28,7 @@ class ReservationsController < ApplicationController
 
   def approve
     @reservation = Reservation.find(params[:id])
-    if @reservation.update(status: 'approved')
+    if @reservation.update(statut: 'Confirmée')
       ReservationMailer.reservation_approved(@reservation).deliver_now
       redirect_to admin_dashboard_path, notice: 'Réservation approuvée et utilisateur notifié.'
     else
@@ -38,7 +38,7 @@ class ReservationsController < ApplicationController
 
   def reject
     @reservation = Reservation.find(params[:id])
-    if @reservation.update(status: 'rejected')
+    if @reservation.update(statut: 'Rejetée')
       ReservationMailer.reservation_rejected(@reservation).deliver_now
       redirect_to admin_dashboard_path, notice: 'Réservation rejetée et utilisateur notifié.'
     else
