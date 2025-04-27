@@ -8,7 +8,7 @@ module Admin
     end
 
     def approve
-      if @reservation.update(status: "confirmée")
+      if @reservation.update(statut: "confirmée")
         redirect_to admin_reservations_path, notice: "Réservation approuvée."
       else
         redirect_to admin_reservations_path, alert: "Erreur lors de l'approbation de la réservation."
@@ -16,7 +16,7 @@ module Admin
     end
 
       def reject
-    if @reservation.update(status: "rejetée")
+    if @reservation.update(statut: "rejetée")
       redirect_to admin_reservations_path, notice: "Réservation rejetée."
     else
       redirect_to admin_reservations_path, alert: "Erreur lors du rejet de la réservation."

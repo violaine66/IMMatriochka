@@ -2,9 +2,10 @@ class ReservationsController < ApplicationController
   before_action :set_experience, only: [:new, :create]
   before_action :set_reservation, only: [:approve, :reject]
 
+
   def index
-    @reservations = current_user.reservations
-    @reservations = Reservation.order(created_at: :desc)
+    @reservations = current_user.reservations.order(created_at: :desc)
+
   end
 
   def new
@@ -23,16 +24,6 @@ class ReservationsController < ApplicationController
     end
   end
 
-  # Action pour approuver la réservation
-  def approve
-    @reservation.update(statut: 'approuvé')
-    redirect_to admin_reservations_path, notice: 'Réservation approuvée.'
-  end
-
-  def reject
-    @reservation.update(statut: 'rejeté')
-    redirect_to admin_reservations_path, notice: 'Réservation rejetée.'
-  end
 
 
   private
