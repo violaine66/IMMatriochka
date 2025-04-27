@@ -22,9 +22,12 @@
               Mon compte
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <% if @experience.present? %>
-                <li><%= link_to "Mes réservations", experience_reservations_path(@experience), class: "dropdown-item" %></li>
+              <% if user_signed_in? %>
+                <li class="nav-item">
+                  <%= link_to "Mes réservations", reservations_path, class: "nav-link" %>
+                </li>
               <% end %>
+
 
               <% if @chatrooms.present? %>
                 <% @chatrooms.each do |chatroom| %>

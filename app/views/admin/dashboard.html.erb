@@ -1,22 +1,3 @@
+<!-- app/views/admin/dashboard.html.erb -->
 <h1>Tableau de bord de l'admin</h1>
 
-<% if @reservations.any? %>
-  <div class="reservation-list">
-    <% @reservations.each do |reservation| %>
-      <div class="reservation-card">
-        <p>Expérience: <%= reservation.experience.nom %></p>
-        <p>Date de début: <%= reservation.date_de_debut.strftime("%d/%m/%Y") %></p>
-        <p>Date de fin: <%= reservation.date_de_fin.strftime("%d/%m/%Y") %></p>
-        <p>Statut: <%= reservation.statut %></p>
-        <p>
-  <%= link_to "Approuver", approve_admin_reservation_path(reservation), method: :patch, class: "dropdown-item" %>
-
-  <%= link_to "Rejeter", reject_admin_reservation_path(reservation), method: :patch %>
-</p>
-
-      </div>
-    <% end %>
-  </div>
-<% else %>
-  <p>Aucune réservation en attente.</p>
-<% end %>

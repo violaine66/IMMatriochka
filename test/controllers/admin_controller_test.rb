@@ -5,4 +5,14 @@ class AdminControllerTest < ActionDispatch::IntegrationTest
     get admin_dashboard_url
     assert_response :success
   end
+
+  test "should get approve" do
+    get admin_approve_url
+    assert_response :success
+  end
+
+  test "should get reject" do
+    get admin_reject_url
+    assert_response :success
+  end
 end
