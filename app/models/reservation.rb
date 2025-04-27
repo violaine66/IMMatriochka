@@ -8,6 +8,8 @@ class Reservation < ApplicationRecord
   validates :date_de_fin, presence: true
   validate :date_de_fin_must_be_after_date_de_debut
 
+  validate :no_overlap_with_existing_reservations
+
   private
 
   def date_de_fin_must_be_after_date_de_debut
@@ -16,6 +18,11 @@ class Reservation < ApplicationRecord
     end
   end
 
+  def no_overlap_with_existing_reservations
+    conflicting_reservations = exeperience.reservations.where('date_de_debut < ? AND date_de_fin > ?', date_de_fin, date_de_debut).exists?
+    errors.add(:base, "Il y a un conflit avec une réservation existante") if conflicting_reservations
+  end
+  
   def notify_admin
     AdminMailer.new_reservation(self).deliver_now
   end

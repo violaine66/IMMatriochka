@@ -5,17 +5,18 @@
         <h3 class= "mt-3">
           Réserve cette éxpérience
         </h3>
-        <div class="form">
+        <div class="form" data-controller="datepicker"
+           data-datepicker-booked-dates-value = "<%= experience.reservations.pluck(:date_de_debut, :date_de_fin).flatten.map { |d| d.to_date.to_s }.to_json %>"
+>
           <%= simple_form_for [experience, reservation] do |f| %>
-          <%= f.input :date_de_debut,
-            as: :string,
-                input_html: {
-                  data: { controller: "datepicker" }
-          }%>
-          <%= f.input :date_de_fin,
-            as: :string,
-                input_html: { data: { controller: "datepicker" }
-          }%>
+         <%= f.input :date_de_debut,
+                      as: :string,
+                      input_html: { data: { controller: "datepicker" } } %>
+
+        <%= f.input :date_de_fin,
+                    as: :string,
+                    input_html: { data: { controller: "datepicker" } } %>
+
           <%= f.submit "Confirmer", class: "btn-reserver" %>
           <% end %>
         </div>
