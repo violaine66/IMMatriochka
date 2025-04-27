@@ -1,4 +1,4 @@
- <%= render "shared/navbar" %>
+<%= render "shared/navbar" %>
 
 <div style="width: 100%; height: 300px;"
   data-controller="map"
@@ -9,45 +9,47 @@
 <div class="container mt-3">
   <div class="photo-container">
     <div class="photo">
-      <%=image_tag asset_path (@experience.photo_url), width: 180, height: 150 %>
+      <%= image_tag asset_path(@experience.photo_url), width: 180, height: 150 %>
     </div>
     <div class="experience-card mt-3">
       <%= @experience.nom %>
-      <p> <%= @experience.description%></p>
-      <p><i class="fa-solid fa-tags me-2"> </i><%= @experience.prix%>€</p>
+      <p> <%= @experience.description %></p>
+      <p><i class="fa-solid fa-tags me-2"> </i><%= @experience.prix %>€</p>
       <i class="fa-solid fa-location-dot me-2"></i><%= @experience.adresse %>
     </div>
   </div>
 
   <div class="avis-don">
     <div class="avis-container">
-        <% if @experience.reviews.any? %>
-          <% @experience.reviews.each do |review| %>
-            <div class="review d-flex justify-content-center">
-              <em class= "me-2">"<%= review.contenu %>"</em>
-              <%= review.note %> ⭐</p>
-            </div>
-          <% end %>
-        <% else %>
-          <p class="mt-5 text-center"><em>Pas d'avis pour le moment.</em></p>
+      <% if @experience.reviews.any? %>
+        <% @experience.reviews.each do |review| %>
+          <div class="review d-flex justify-content-center">
+            <em class= "me-2">"<%= review.contenu %>"</em>
+            <%= review.note %> ⭐
+          </div>
         <% end %>
-      </div>
-
-      <div class="avis mt-3">
-        <%= link_to "Vous avez vécu cette expérience ? Partagez votre avis !", new_experience_review_path(@experience), class: " text-decoration-none text-dark" %>
-      </div>
-  </div>
-
-
-
-  <div data-controller="toggle" class="text-center mt-5">
-    <button class="btn-reserver" data-action="click->toggle#fire"> Réserver </button>
-    <div data-toggle-target="toggableElement"  class="d-none">
-      <%= render "reservations/form", experience: @experience, reservation: Reservation.new %>
+      <% else %>
+        <p class="mt-5 text-center"><em>Pas d'avis pour le moment.</em></p>
+      <% end %>
     </div>
 
+    <div class="avis mt-3">
+      <%= link_to "Vous avez vécu cette expérience ? Partagez votre avis !", new_experience_review_path(@experience), class: " text-decoration-none text-dark" %>
+    </div>
   </div>
 
-    <hr>
-    <%= link_to "Retour", experiences_path, class: "text-decoration-none text-dark" %>
+  <!-- Affichage du formulaire de réservation uniquement si l'utilisateur est connecté -->
+  <div data-controller="toggle" class="text-center mt-5">
+    <% if current_user %> <!-- Vérification si l'utilisateur est connecté -->
+      <button class="btn-reserver" data-action="click->toggle#fire"> Réserver </button>
+      <div data-toggle-target="toggableElement" class="d-none">
+        <%= render "reservations/form", experience: @experience, reservation: Reservation.new %>
+      </div>
+    <% else %>
+      <p class="text-center">Vous devez être connecté pour réserver cette expérience.</p>
+    <% end %>
+  </div>
+
+  <hr>
+  <%= link_to "Retour", experiences_path, class: "text-decoration-none text-dark" %>
 </div>

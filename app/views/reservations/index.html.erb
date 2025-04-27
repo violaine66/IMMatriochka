@@ -9,6 +9,9 @@
           <p><%= r.experience.nom %></p>
           <p>du <%= r.date_de_debut.strftime("%d/%m/%Y") %> au <%= r.date_de_fin.strftime("%d/%m/%Y")%></p>
           <p><%= r.experience.prix %> euros</p>
+          <p>
+            <%= r.statut %>
+          </p>
           <% if Date.today < r.date_de_debut %>
             <p>Votre réservation n'a pas encore commencé </p>
           <% elsif Date.today > r.date_de_fin %>

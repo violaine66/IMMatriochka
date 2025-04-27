@@ -1,30 +1,27 @@
 Rails.application.routes.draw do
-  get 'notifications/index'
-  get 'notifications/show'
   devise_for :users
   root to: "pages#home"
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
-
-  # Defines the root path route ("/")
-  # root "posts#index"
+  # Routes de chat
   resources :chatrooms, only: [:index, :show] do
     resources :messages, only: [:create]
   end
-  resources :reservations do
-    member do
-      patch :approve
-      patch :reject
+
+  namespace :admin do
+    resources :reservations, only: [:index, :show, :update, :destroy] do
+      member do
+        patch :approve
+        patch :reject
+      end
     end
   end
 
-
-  resources :reservations, only: [:index]
+  # Routes pour les expériences et les avis
   resources :experiences, only: [:index, :show, :new, :create] do
-    resources :reservations, only: [:new, :create ]
+    resources :reservations, only: [:index, :new, :create]
     resources :reviews, only: [:new, :create]
   end
+
+  # Route pour le tableau de bord admin
+  get 'admin/dashboard', to: 'admin#dashboard', as: 'admin_dashboard'
 end

@@ -7,6 +7,6 @@ class User < ApplicationRecord
   has_many :reservations, dependent: :destroy
 
   def admin?
-    self.admin
+    self.admin == true
   end
 end
