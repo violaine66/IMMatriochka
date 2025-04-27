@@ -16,6 +16,7 @@ class ReservationsController < ApplicationController
   def create
     @reservation = @experience.reservations.build(reservation_params)
     @reservation.user = current_user
+    @reservation.status = 'pending'
 
     if @reservation.save
 
@@ -24,6 +25,28 @@ class ReservationsController < ApplicationController
       redirect_to experiences_path, statut: :unprocessable_entity
     end
   end
+
+  def approve
+    @reservation = Reservation.find(params[:id])
+    if @reservation.update(status: 'approved')
+      ReservationMailer.reservation_approved(@reservation).deliver_now
+      redirect_to admin_dashboard_path, notice: 'Réservation approuvée et utilisateur notifié.'
+    else
+      redirect_to admin_dashboard_path, alert: 'Erreur lors de l\'approbation.'
+    end
+  end
+
+  def reject
+    @reservation = Reservation.find(params[:id])
+    if @reservation.update(status: 'rejected')
+      ReservationMailer.reservation_rejected(@reservation).deliver_now
+      redirect_to admin_dashboard_path, notice: 'Réservation rejetée et utilisateur notifié.'
+    else
+      redirect_to admin_dashboard_path, alert: 'Erreur lors du rejet.'
+    end
+  end
+
+
 
   private
   def set_experience

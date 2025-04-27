@@ -147,12 +147,14 @@ puts "Experiences created successfully!"
 puts "Creating users..."
 users = [
   {nickname: "Violaine",
-  email: "violaine@app.fr",
+  email: "nolila5966@gmail.com",
   password: "violaine"
+  admin: true
   },
   {nickname: "Hélène",
-  email: "helene@app.fr",
+  email: "violaine-helene.soulas@ac-lille.fr",
   password: "helene"
+  admin: false
   }
 ]
 users.each do |user|

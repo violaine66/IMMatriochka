@@ -14,6 +14,13 @@ Rails.application.routes.draw do
   resources :chatrooms, only: [:index, :show] do
     resources :messages, only: [:create]
   end
+  resources :reservations do
+    member do
+      patch :approve
+      patch :reject
+    end
+  end
+
 
   resources :reservations, only: [:index]
   resources :experiences, only: [:index, :show, :new, :create] do
