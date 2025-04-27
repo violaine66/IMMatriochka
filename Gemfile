@@ -54,6 +54,8 @@ gem "cloudinary"
 gem "geocoder"
 gem "noticed"
 
+gem "solid_queue"
+
 
 group :development, :test do
   gem "dotenv-rails"
