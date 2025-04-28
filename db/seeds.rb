@@ -146,22 +146,23 @@ end
 
 puts "Creating users..."
 
-users = [
-  { nickname: "Violaine", email: "nolila5966@gmail.com", password: "violaine", admin: true },
-  { nickname: "Hélène", email: "violaine-helene.soulas@ac-lille.fr", password: "helene", admin: false }
-]
+# users = [
+#   { nickname: "Violaine", email: "nolila5966@gmail.com", password: "violaine", admin: true },
+#   { nickname: "Hélène", email: "violaine-helene.soulas@ac-lille.fr", password: "helene", admin: false }
+# ]
 
-# Crée un utilisateur de test sans envoyer d'e-mails en production
-users.each do |user_data|
-  user = User.create!(user_data)
+# # Crée un utilisateur de test sans envoyer d'e-mails en production
+# users.each do |user_data|
+#   user = User.create!(user_data)
 
-  # Si nous sommes en développement ou test, envoyez l'e-mail de bienvenue
-  if Rails.env.development? || Rails.env.test?
-    user.send_welcome_email # Cela est autorisé seulement en développement ou test
-  end
-end
+#   # Si nous sommes en développement ou test, envoyez l'e-mail de bienvenue
+#   if Rails.env.development? || Rails.env.test?
+#     user.send_welcome_email # Cela est autorisé seulement en développement ou test
+#   end
+# end
 
-puts "Users created successfully!"
+# puts "Users created successfully!"
+puts "Users creation skipped. Please create them manually after deployment."
 
 puts "Creating chatrooms..."
 Chatroom.create!(nom: "general")
