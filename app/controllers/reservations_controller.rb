@@ -22,6 +22,8 @@ class ReservationsController < ApplicationController
     @reservation.statut = 'en_attente' # Statut initial
 
     if @reservation.save
+      mail = ConfirmationReservationMailer.with(reservation: @reservation, user: current_user).creation_confirmation
+      mail.deliver_now
       redirect_to experiences_path, notice: 'Votre réservation a bien été enregistrée et attend la validation de l\'administrateur.'
     else
       render 'experiences/show', alert: 'Erreur lors de la création de la réservation.'

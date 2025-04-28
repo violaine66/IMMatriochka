@@ -1,0 +1,7 @@
+<div class="container">
+  Votre réservation <%= @reservation.experience.nom %> a bien été crée du <%= @reservation.date_de_debut.strftime("%d/%m/%Y") %> au <%= @reservation.date_de_fin.strftime("%d/%m/%Y") %>
+  <p>
+      Elle est actuellement en attente de validation par l'administrateur.
+      Vous recevrez un email de confirmation lorsque votre réservation sera validée.
+  </p>
+</div>

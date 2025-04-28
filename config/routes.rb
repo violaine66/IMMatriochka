@@ -3,6 +3,10 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
 
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
+
   # Routes de chat
   resources :chatrooms, only: [:index, :show] do
     resources :messages, only: [:create]
@@ -25,6 +29,9 @@ Rails.application.routes.draw do
         post 'reject'
       end
     end
+
+
+
 
 
 
