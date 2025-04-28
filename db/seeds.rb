@@ -145,23 +145,23 @@ experiences.each do |experience|
 end
 
 puts "Creating users..."
+
 users = [
-  {nickname: "Violaine", email: "nolila5966@gmail.com", password: "violaine", admin: true},
-  {nickname: "Hélène", email: "violaine-helene.soulas@ac-lille.fr", password: "helene", admin: false}
+  { nickname: "Violaine", email: "nolila5966@gmail.com", password: "violaine", admin: true },
+  { nickname: "Hélène", email: "violaine-helene.soulas@ac-lille.fr", password: "helene", admin: false }
 ]
 
-# Créez des utilisateurs sans envoyer d'e-mails en production
-users.each do |user_params|
-  user = User.create!(user_params)
+# Crée un utilisateur de test sans envoyer d'e-mails en production
+users.each do |user_data|
+  user = User.create!(user_data)
 
-  # Si ce n'est pas en environnement de production, on envoie l'e-mail
-  if !Rails.env.production?
-    user.send_welcome_email # Assurez-vous que la méthode `send_welcome_email` est définie dans votre modèle User
+  # Si nous sommes en développement ou test, envoyez l'e-mail de bienvenue
+  if Rails.env.development? || Rails.env.test?
+    user.send_welcome_email # Cela est autorisé seulement en développement ou test
   end
 end
 
 puts "Users created successfully!"
-
 
 puts "Creating chatrooms..."
 Chatroom.create!(nom: "general")
