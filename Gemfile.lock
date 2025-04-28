@@ -380,7 +380,6 @@ DEPENDENCIES
   font-awesome-sass (~> 6.1)
   geocoder
   importmap-rails (~> 1.2.3)
-  letter_opener
   letter_opener_web
   noticed
   pg (~> 1.1)
