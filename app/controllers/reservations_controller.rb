@@ -40,7 +40,10 @@ class ReservationsController < ApplicationController
     # Action pour mettre à jour la réservation
     def update
       if current_user.admin? && @reservation.update(reservation_params)
-        redirect_to reservations_path, notice: 'Le statut de la réservation a été mis à jour avec succès.'
+        # On passe l'instance globale @reservation au mailer
+        mail = ReservationStatusMailer.with(reservation: @reservation, user: current_user).status_updated(@reservation)
+        mail.deliver_now
+        redirect_to reservations_path, notice: 'Le statut de la réservation a été mis à jour avec succès et email envoyé !'
       else
         render :edit, alert: 'Erreur lors de la mise à jour du statut.'
       end
