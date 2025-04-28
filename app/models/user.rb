@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :reviews, dependent: :destroy
   has_many :reservations, dependent: :destroy
-  after_create :send_welcome_email
+  after_create :send_welcome_email, unless: -> { Rails.env.development? || Rails.env.test? }
 
   def admin?
     self.admin == true
