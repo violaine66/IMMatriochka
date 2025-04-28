@@ -144,25 +144,24 @@ experiences.each do |experience|
   Experience.create!(experience)
 end
 
-puts "Experiences created successfully!"
-
 puts "Creating users..."
 users = [
-  {nickname: "Violaine",
-  email: "nolila5966@gmail.com",
-  password: "violaine",
-  admin: true
-  },
-  {nickname: "Hélène",
-  email: "violaine-helene.soulas@ac-lille.fr",
-  password: "helene",
-  admin: false
-  }
+  {nickname: "Violaine", email: "nolila5966@gmail.com", password: "violaine", admin: true},
+  {nickname: "Hélène", email: "violaine-helene.soulas@ac-lille.fr", password: "helene", admin: false}
 ]
-users.each do |user|
-  User.create!(user)
+
+# Créez des utilisateurs sans envoyer d'e-mails en production
+users.each do |user_params|
+  user = User.create!(user_params)
+
+  # Si ce n'est pas en environnement de production, on envoie l'e-mail
+  if !Rails.env.production?
+    user.send_welcome_email # Assurez-vous que la méthode `send_welcome_email` est définie dans votre modèle User
+  end
 end
+
 puts "Users created successfully!"
+
 
 puts "Creating chatrooms..."
 Chatroom.create!(nom: "general")
