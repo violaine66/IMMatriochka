@@ -5,8 +5,9 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.welcome.subject
 
-  def welcome
-    @user = params[:user] # On récupère l'utilisateur depuis params
+  def welcome(user)
+    return if user.admin?
+    @user = user # On récupère l'utilisateur depuis params
     mail(to: @user.email, subject: "Welcome #{@user.nickname}")
   end
 end

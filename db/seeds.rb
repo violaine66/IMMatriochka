@@ -145,10 +145,12 @@ experiences.each do |experience|
 end
 
 puts "Creating users..."
+ActionMailer::Base.perform_deliveries = false
+user = User.create!(email: "nolila5966@gmail.com", password: "violaine", admin: true)
 
 # users = [
-#   { nickname: "Violaine", email: "nolila5966@gmail.com", password: "violaine", admin: true },
-#   { nickname: "Hélène", email: "violaine-helene.soulas@ac-lille.fr", password: "helene", admin: false }
+#   {  email: "nolila5966@gmail.com", password: "violaine", admin: true },
+  # { nickname: "Hélène", email: "violaine-helene.soulas@ac-lille.fr", password: "helene", admin: false }
 # ]
 
 # # Crée un utilisateur de test sans envoyer d'e-mails en production
@@ -160,9 +162,10 @@ puts "Creating users..."
 #     user.send_welcome_email # Cela est autorisé seulement en développement ou test
 #   end
 # end
+ActionMailer::Base.perform_deliveries = true
 
-# puts "Users created successfully!"
-puts "Users creation skipped. Please create them manually after deployment."
+puts "Users created successfully!"
+# puts "Users creation skipped. Please create them manually after deployment."
 
 puts "Creating chatrooms..."
 Chatroom.create!(nom: "general")

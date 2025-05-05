@@ -23,7 +23,7 @@ class ReservationsController < ApplicationController
 
     if @reservation.save
       mail = ConfirmationReservationMailer.with(reservation: @reservation, user: current_user).creation_confirmation
-      mail.deliver_now
+      mail.deliver_later
       redirect_to experiences_path, notice: 'Votre réservation a bien été enregistrée et attend la validation de l\'administrateur.'
     else
       render 'experiences/show', alert: 'Erreur lors de la création de la réservation.'
@@ -41,8 +41,8 @@ class ReservationsController < ApplicationController
     def update
       if current_user.admin? && @reservation.update(reservation_params)
         # On passe l'instance globale @reservation au mailer
-        mail = ReservationStatusMailer.with(reservation: @reservation, user: current_user).status_updated(@reservation)
-        mail.deliver_now
+        mail = ReservationStatusMailer.with(reservation: @reservation, user: current_user).status_updated
+        mail.deliver_later # Envoi du mail en arrière-plan
         redirect_to reservations_path, notice: 'Le statut de la réservation a été mis à jour avec succès et email envoyé !'
       else
         render :edit, alert: 'Erreur lors de la mise à jour du statut.'
